@@ -1,18 +1,33 @@
+/*
+##########################
+This code is wholly created solely by me, Thom Breugelmans,
+No code is copied or reused from other people, everything in this file is created by me after reading about the problem and its solution.
+Below I give credit to the resources I used to get to my current code, and I state what I used the resources for.
+
+This code was created as an exercise to test my problem solving skills and keep my skillset fresh.
+
+Credits and used resources:
+
+https://www.geeksforgeeks.org/exact-cover-problem-algorithm-x-set-1
+    - for understanding the basics of the exact cover problem
+https://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X and
+https://www.ocf.berkeley.edu/~jchu/publicportal/sudoku/0011047.pdf
+    - for understanding the algorithm X, its theory and how it executes
+https://medium.com/javarevisited/building-a-sudoku-solver-in-java-with-dancing-links-180274b0b6c1 and
+https://en.wikipedia.org/wiki/Dancing_Links and
+https://www-cs-faculty.stanford.edu/~uno/papers/dancing-color.ps.gz 
+    - for the logic behind the dancing links data structure
+https://www.ocf.berkeley.edu/~jchu/publicportal/sudoku/sudoku.paper.html
+    - namely the handwritten cover matrix of the 4x4 sudoku to get an idea of what it should look like and a visual of how to constraints work
+https://shivankaul.com/blog/sudoku and
+https://www.ocf.berkeley.edu/~jchu/publicportal/sudoku/sudoku.paper.html
+    - for a second hand view on the exact cover/sudoku problem and their ideas on how it should work
+##########################
+ */
+
 package SudokuSolver;
 
 import java.util.*;
-
-/*
-##########################
-https://www.geeksforgeeks.org/exact-cover-problem-algorithm-x-set-1
-    - for understanding the basics of the exact cover problem
-https://medium.com/javarevisited/building-a-sudoku-solver-in-java-with-dancing-links-180274b0b6c1
-    - for the logic behind the dancing links data structure
-https://shivankaul.com/blog/sudoku
-https://www.ocf.berkeley.edu/~jchu/publicportal/sudoku/sudoku.paper.html
-    - namely the handwritten cover matrix of the 4x4 sudoku
-##########################
- */
 
 public class SudokuDLX {
 
@@ -20,8 +35,6 @@ public class SudokuDLX {
         ColumnNode header = createDLX(grid);
         List<DancingNode> solution = new ArrayList<>();
         boolean isSolved = _solve(header, solution);
-
-        // System.out.println("found solution? " + isSolved);
 
         if (isSolved) {
             int[][] solved = reconstructSolution(grid, solution);
@@ -75,7 +88,6 @@ public class SudokuDLX {
             }
             // the current game state cannot reach a solution, undo choices and start backtracking
             c.uncover();
-            // System.out.println("no solution for this gamestate");
 
             return false;
         }
@@ -89,13 +101,11 @@ public class SudokuDLX {
             selected = c;
             min = c.size;
         }
-        // System.out.println("selected column: " + selected.id + " with " + min + " rows");
         return selected;
     }
 
     public static ColumnNode createDLX(int[][] grid) {
         int[][] coverMatrix = createCoverMatrix(grid);
-        // Solution2.print2dArray(coverMatrix);
         int n = grid.length;
         ColumnNode header = new ColumnNode(-1);
         List<ColumnNode> columns = new ArrayList<>(4*n*n);
