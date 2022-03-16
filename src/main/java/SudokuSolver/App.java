@@ -4,6 +4,6 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        // TODO: link with sudoku solvers to create T/GUI for this application
     }
 }
