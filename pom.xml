@@ -7,6 +7,22 @@
   <version>1.0.1</version>
   <name>SudokuSolver</name>
   <url>http://maven.apache.org</url>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <mainClass>SudokuSolver.App</mainClass>
+          <!--arguments>
+            <argument>argument1</argument>
+          </arguments-->
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
   <properties>
     <!-- https://maven.apache.org/general.html#encoding-warning -->
@@ -16,6 +32,11 @@
   </properties>
 
   <dependencies>
+    <dependency>
+        <groupId>com.googlecode.lanterna</groupId>
+        <artifactId>lanterna</artifactId>
+        <version>3.1.2</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
     <dependency>
         <groupId>org.junit.jupiter</groupId>
